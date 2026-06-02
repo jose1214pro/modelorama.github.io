@@ -65,8 +65,63 @@
       align-items: center;
       gap: 8px;
     }
-    .btn-regresar:hover {
-      background: var(--azul-claro);
+    .btn-regresar:hover { background: var(--azul-claro); }
+
+    /* MENÚ DE SECCIONES (TABS) */
+    .seccion-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+      border-bottom: 3px solid #dde3ea;
+      padding-bottom: 0;
+    }
+    .seccion-tab {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      color: #666;
+      padding: 10px 22px;
+      cursor: pointer;
+      border-radius: 6px 6px 0 0;
+      border: none;
+      background: transparent;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -3px;
+      transition: color .2s, border-color .2s, background .2s;
+    }
+    .seccion-tab:hover { color: var(--azul); background: #e8eef8; }
+    .seccion-tab.activo {
+      color: var(--azul);
+      border-bottom: 3px solid var(--amarillo);
+      background: #fff;
+    }
+
+    /* TÍTULO DE SECCIÓN */
+    .seccion-titulo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--azul);
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .seccion-titulo::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: var(--amarillo);
+      border-radius: 2px;
+    }
+
+    /* SECCIÓN DE PRODUCTOS */
+    .seccion-productos {
+      display: none;
+    }
+    .seccion-productos.activo {
+      display: block;
     }
 
     /* REJILLA DE PRODUCTOS */
@@ -99,7 +154,7 @@
       justify-content: center;
       padding: 15px;
       border-bottom: 1px solid #eee;
-      cursor: pointer; /* Indica que se puede hacer clic */
+      cursor: pointer;
     }
     .producto-img-box img {
       max-width: 100%;
@@ -107,9 +162,7 @@
       object-fit: contain;
       transition: transform 0.3s ease;
     }
-    .producto-img-box:hover img {
-      transform: scale(1.05); /* Pequeño efecto al pasar el mouse por encima */
-    }
+    .producto-img-box:hover img { transform: scale(1.05); }
     .producto-info {
       padding: 20px;
       display: flex;
@@ -134,10 +187,8 @@
     /* MODAL PARA ZOOM DE IMAGEN */
     #image-modal {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       background: rgba(0, 0, 0, 0.85);
       z-index: 9999;
       display: flex;
@@ -147,31 +198,20 @@
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-    #image-modal.activo {
-      opacity: 1;
-      visibility: visible;
-    }
+    #image-modal.activo { opacity: 1; visibility: visible; }
     #image-modal img {
-      max-width: 90%;
-      max-height: 90vh;
+      max-width: 90%; max-height: 90vh;
       object-fit: contain;
       border-radius: 8px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.5);
       transform: scale(0.8);
       transition: transform 0.3s ease;
     }
-    #image-modal.activo img {
-      transform: scale(1);
-    }
+    #image-modal.activo img { transform: scale(1); }
     .cerrar-modal {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      color: white;
-      font-size: 40px;
-      font-weight: bold;
-      cursor: pointer;
-      z-index: 10000;
+      position: absolute; top: 20px; right: 30px;
+      color: white; font-size: 40px; font-weight: bold;
+      cursor: pointer; z-index: 10000;
     }
     .cerrar-modal:hover { color: var(--amarillo); }
 
@@ -179,12 +219,8 @@
     .banner-inferior { width: 100%; line-height: 0; display: block; cursor: pointer; margin-top: 60px; }
     .banner-inferior img {
       width: 100%;
-      height: 40vw;
-      max-height: 440px;
-      min-height: 200px;
-      object-fit: cover;
-      object-position: center center;
-      display: block;
+      height: 40vw; max-height: 440px; min-height: 200px;
+      object-fit: cover; object-position: center center; display: block;
     }
 
     /* FOOTER */
@@ -218,6 +254,7 @@
       nav .nav-links { gap: 14px; font-size: .85rem; }
       .catalogo-container { margin-top: 100px; }
       .action-bar { flex-direction: column; gap: 15px; align-items: flex-start; }
+      .seccion-tab { font-size: 1rem; padding: 8px 14px; }
       .grid-productos { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
       .producto-img-box { height: 160px; padding: 10px; }
       .producto-nombre { font-size: 0.95rem; }
@@ -242,7 +279,7 @@
 </nav>
 
 <div class="catalogo-container">
-  
+
   <div class="action-bar">
     <h1>Nuestros Productos</h1>
     <a href="index.html" class="btn-regresar">
@@ -250,320 +287,417 @@
     </a>
   </div>
 
-  <div class="grid-productos">
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/2 Modelo 473 ml.jpg" alt="2 Modelo 473 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">2 Modelo 473 ml</div>
-        <div class="producto-precio">$39.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/2 Vicky Sabor 473 ml.jpg" alt="2 Vicky Sabor 473 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">2 Vicky Sabor 473 ml</div>
-        <div class="producto-precio">$45.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/3 Victoria y Corona 473 ml.jpg" alt="3 Victoria y Corona 473 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">3 Victoria y Corona 473 ml</div>
-        <div class="producto-precio">$58.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/4 Modelo 355 ml.webp" alt="4 Modelo 355 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">4 Modelo 355 ml</div>
-        <div class="producto-precio">$67.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/6 Michelob Ultra lata.webp" alt="6 Michelob Ultra lata"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">6 Michelob Ultra lata</div>
-        <div class="producto-precio">$104.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/6 Michelob Ultra media.jpg" alt="6 Michelob Ultra media"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">6 Michelob Ultra media</div>
-        <div class="producto-precio">$110.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/6 Modelo Especial o Negra 355 ml.jpg" alt="6 Modelo Especial o Negra 355 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">6 Modelo Especial o Negra 355 ml</div>
-        <div class="producto-precio">$106.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/6 Victoria y Corona 355 ml.jpg" alt="6 Victoria y Corona 355 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">6 Victoria y Corona 355 ml</div>
-        <div class="producto-precio">$92.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/16 Corona y Victoria 210 ml.jpg" alt="16 Corona y Victoria 210 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">16 Corona y Victoria 210 ml</div>
-        <div class="producto-precio">$154.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/100 anos 200ml.jpg" alt="100 años 200 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">100 años 200 ml</div>
-        <div class="producto-precio">$110.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Absolut 750 ml.jpg" alt="Absolut 750 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Absolut 750 ml</div>
-        <div class="producto-precio">$300.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Absolut Raspberry.jpg" alt="Absolut Raspberry"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Absolut Raspberry</div>
-        <div class="producto-precio">$300.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Anis Mico 250ml.jpg" alt="Anís Mico 250 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Anís Mico 250 ml</div>
-        <div class="producto-precio">$60.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Appleton 200ml.jpg" alt="Appleton 200 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Appleton 200 ml</div>
-        <div class="producto-precio">$100.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Bacardi Anejo 200ml.jpg" alt="Bacardí Añejo 200 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Bacardí Añejo 200 ml</div>
-        <div class="producto-precio">$68.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Bacardi Carta Blanda 200ml.jpg" alt="Bacardí Carta Blanca 200 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Bacardí Carta Blanca 200 ml</div>
-        <div class="producto-precio">$70.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Coca cola 250ml.webp" alt="Coca Cola 250 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Coca Cola 250 ml</div>
-        <div class="producto-precio">$13.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Coca Cola 355ml lata.jpg" alt="Coca Cola 355 ml lata"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Coca Cola 355 ml lata</div>
-        <div class="producto-precio">$17.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Coca Cola 600ml.webp" alt="Coca Cola 600 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Coca Cola 600 ml</div>
-        <div class="producto-precio">$18.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Dr Pepper 600ml.jpg" alt="Dr Pepper 600 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Dr Pepper 600 ml</div>
-        <div class="producto-precio">$17.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Nestle Pv 1.5L.jpg" alt="Nestlé Pureza Vital 1.5 L"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Nestlé Pureza Vital 1.5 L</div>
-        <div class="producto-precio">$13.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Nestlé Pureza Vital 4 L.jpg" alt="Nestlé Pureza Vital 4 L"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Nestlé Pureza Vital 4 L</div>
-        <div class="producto-precio">$28.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Penafiel Agua Min 600ml.jpg" alt="Peñafiel Agua Mineral 600 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Peñafiel Agua Mineral 600 ml</div>
-        <div class="producto-precio">$16.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Penafiel Fresada 600ml.jpg" alt="Peñafiel Fresa 600 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Peñafiel Fresa 600 ml</div>
-        <div class="producto-precio">$18.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Penafiel Limonada 600ml.jpg" alt="Peñafiel Limonada 600 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Peñafiel Limonada 600 ml</div>
-        <div class="producto-precio">$18.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Penafiel Mangada 600ml.jpg" alt="Peñafiel Mango 600 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Peñafiel Mango 600 ml</div>
-        <div class="producto-precio">$18.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Clamato 1L.jpg" alt="Clamato 1 L"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Clamato 1 L</div>
-        <div class="producto-precio">$40.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Coca 355ml.jpg" alt="Coca Cola 355 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Coca Cola 355 ml</div>
-        <div class="producto-precio">$13.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Coca cola 3L.jpg" alt="Coca Cola 3 L"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Coca Cola 3 L</div>
-        <div class="producto-precio">$45.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Don Pedro Reserva Especial 200ml.webp" alt="Don Pedro Reserva Especial 200 ml"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Don Pedro Reserva Especial 200 ml</div>
-        <div class="producto-precio">$62.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/HIELOS.webp" alt="Hielos"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Hielos</div>
-        <div class="producto-precio">$28.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Jumex de 1L.jpg" alt="Jumex 1 L"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Jumex 1 L</div>
-        <div class="producto-precio">$30.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Kindle Delice.webp" alt="Kindle Delice"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Kindle Delice</div>
-        <div class="producto-precio">$15.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Monster.webp" alt="Monster Energy"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Monster Energy</div>
-        <div class="producto-precio">$32.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/New Mix.webp" alt="New Mix"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">New Mix</div>
-        <div class="producto-precio">$23.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Pena Sifon 1.72L.webp" alt="Peñafiel Sifón 1.72 L"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Peñafiel Sifón 1.72 L</div>
-        <div class="producto-precio">$30.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/Sprite 3L.jpg" alt="Sprite 3 L"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Sprite 3 L</div>
-        <div class="producto-precio">$45.00</div>
-      </div>
-    </div>
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/maruchan.webp" alt="Maruchan Preparada"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Maruchan Preparada</div>
-        <div class="producto-precio">$18.00</div>
-      </div>
-    </div>
-
-    <div class="producto-card">
-      <div class="producto-img-box"><img src="productos/maruchansinpreparar.webp" alt="Maruchan"/></div>
-      <div class="producto-info">
-        <div class="producto-nombre">Maruchan</div>
-        <div class="producto-precio">$15.00</div>
-      </div>
-    </div>
-
+  <!-- MENÚ DE SECCIONES -->
+  <div class="seccion-menu">
+    <button class="seccion-tab activo" data-seccion="todos">Todos</button>
+    <button class="seccion-tab" data-seccion="cervezas">🍺 Cervezas</button>
+    <button class="seccion-tab" data-seccion="bebidas">🥤 Bebidas</button>
+    <button class="seccion-tab" data-seccion="vodka">🍸 Vodka</button>
+    <button class="seccion-tab" data-seccion="ron">🥃 Ron</button>
+    <button class="seccion-tab" data-seccion="tequila">🌵 Tequila / Brandy</button>
+    <button class="seccion-tab" data-seccion="botanas">🍜 Botanas</button>
+    <button class="seccion-tab" data-seccion="extras">🧊 Extras</button>
   </div>
+
+  <!-- TODOS -->
+  <div class="seccion-productos activo" id="todos">
+    <!-- Cervezas -->
+    <div class="seccion-titulo">🍺 Cervezas</div>
+    <div class="grid-productos" style="margin-bottom:40px;">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/2 Modelo 473 ml.jpg" alt="2 Modelo 473 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">2 Modelo 473 ml</div><div class="producto-precio">$39.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/2 Vicky Sabor 473 ml.jpg" alt="2 Vicky Sabor 473 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">2 Vicky Sabor 473 ml</div><div class="producto-precio">$45.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/3 Victoria y Corona 473 ml.jpg" alt="3 Victoria y Corona 473 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">3 Victoria y Corona 473 ml</div><div class="producto-precio">$58.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/4 Modelo 355 ml.webp" alt="4 Modelo 355 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">4 Modelo 355 ml</div><div class="producto-precio">$67.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/6 Michelob Ultra lata.webp" alt="6 Michelob Ultra lata"/></div>
+        <div class="producto-info"><div class="producto-nombre">6 Michelob Ultra lata</div><div class="producto-precio">$104.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/6 Michelob Ultra media.jpg" alt="6 Michelob Ultra media"/></div>
+        <div class="producto-info"><div class="producto-nombre">6 Michelob Ultra media</div><div class="producto-precio">$110.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/6 Modelo Especial o Negra 355 ml.jpg" alt="6 Modelo Especial o Negra 355 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">6 Modelo Especial o Negra 355 ml</div><div class="producto-precio">$106.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/6 Victoria y Corona 355 ml.jpg" alt="6 Victoria y Corona 355 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">6 Victoria y Corona 355 ml</div><div class="producto-precio">$92.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/16 Corona y Victoria 210 ml.jpg" alt="16 Corona y Victoria 210 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">16 Corona y Victoria 210 ml</div><div class="producto-precio">$154.00</div></div>
+      </div>
+    </div>
+
+    <!-- Bebidas -->
+    <div class="seccion-titulo">🥤 Bebidas</div>
+    <div class="grid-productos" style="margin-bottom:40px;">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Coca cola 250ml.webp" alt="Coca Cola 250 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Coca Cola 250 ml</div><div class="producto-precio">$13.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Coca Cola 355ml lata.jpg" alt="Coca Cola 355 ml lata"/></div>
+        <div class="producto-info"><div class="producto-nombre">Coca Cola 355 ml lata</div><div class="producto-precio">$17.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Coca Cola 600ml.webp" alt="Coca Cola 600 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Coca Cola 600 ml</div><div class="producto-precio">$18.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Coca 355ml.jpg" alt="Coca Cola 355 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Coca Cola 355 ml</div><div class="producto-precio">$13.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Coca cola 3L.jpg" alt="Coca Cola 3 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Coca Cola 3 L</div><div class="producto-precio">$45.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Dr Pepper 600ml.jpg" alt="Dr Pepper 600 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Dr Pepper 600 ml</div><div class="producto-precio">$17.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Sprite 3L.jpg" alt="Sprite 3 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Sprite 3 L</div><div class="producto-precio">$45.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Nestle Pv 1.5L.jpg" alt="Nestlé Pureza Vital 1.5 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Nestlé Pureza Vital 1.5 L</div><div class="producto-precio">$13.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Nestlé Pureza Vital 4 L.jpg" alt="Nestlé Pureza Vital 4 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Nestlé Pureza Vital 4 L</div><div class="producto-precio">$28.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Penafiel Agua Min 600ml.jpg" alt="Peñafiel Agua Mineral 600 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Peñafiel Agua Mineral 600 ml</div><div class="producto-precio">$16.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Penafiel Fresada 600ml.jpg" alt="Peñafiel Fresa 600 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Peñafiel Fresa 600 ml</div><div class="producto-precio">$18.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Penafiel Limonada 600ml.jpg" alt="Peñafiel Limonada 600 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Peñafiel Limonada 600 ml</div><div class="producto-precio">$18.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Penafiel Mangada 600ml.jpg" alt="Peñafiel Mango 600 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Peñafiel Mango 600 ml</div><div class="producto-precio">$18.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Pena Sifon 1.72L.webp" alt="Peñafiel Sifón 1.72 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Peñafiel Sifón 1.72 L</div><div class="producto-precio">$30.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Clamato 1L.jpg" alt="Clamato 1 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Clamato 1 L</div><div class="producto-precio">$40.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Jumex de 1L.jpg" alt="Jumex 1 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Jumex 1 L</div><div class="producto-precio">$30.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Monster.webp" alt="Monster Energy"/></div>
+        <div class="producto-info"><div class="producto-nombre">Monster Energy</div><div class="producto-precio">$32.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/New Mix.webp" alt="New Mix"/></div>
+        <div class="producto-info"><div class="producto-nombre">New Mix</div><div class="producto-precio">$23.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Kindle Delice.webp" alt="Kindle Delice"/></div>
+        <div class="producto-info"><div class="producto-nombre">Kindle Delice</div><div class="producto-precio">$15.00</div></div>
+      </div>
+    </div>
+
+    <!-- Vodka -->
+    <div class="seccion-titulo">🍸 Vodka</div>
+    <div class="grid-productos" style="margin-bottom:40px;">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Absolut 750 ml.jpg" alt="Absolut 750 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Absolut 750 ml</div><div class="producto-precio">$300.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Absolut Raspberry.jpg" alt="Absolut Raspberry"/></div>
+        <div class="producto-info"><div class="producto-nombre">Absolut Raspberry</div><div class="producto-precio">$300.00</div></div>
+      </div>
+    </div>
+
+    <!-- Ron -->
+    <div class="seccion-titulo">🥃 Ron</div>
+    <div class="grid-productos" style="margin-bottom:40px;">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Appleton 200ml.jpg" alt="Appleton 200 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Appleton 200 ml</div><div class="producto-precio">$100.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Bacardi Anejo 200ml.jpg" alt="Bacardí Añejo 200 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Bacardí Añejo 200 ml</div><div class="producto-precio">$68.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Bacardi Carta Blanda 200ml.jpg" alt="Bacardí Carta Blanca 200 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Bacardí Carta Blanca 200 ml</div><div class="producto-precio">$70.00</div></div>
+      </div>
+    </div>
+
+    <!-- Tequila / Brandy -->
+    <div class="seccion-titulo">🌵 Tequila / Brandy</div>
+    <div class="grid-productos" style="margin-bottom:40px;">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/100 anos 200ml.jpg" alt="100 años 200 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">100 años 200 ml</div><div class="producto-precio">$110.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Anis Mico 250ml.jpg" alt="Anís Mico 250 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Anís Mico 250 ml</div><div class="producto-precio">$60.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Don Pedro Reserva Especial 200ml.webp" alt="Don Pedro Reserva Especial 200 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Don Pedro Reserva Especial 200 ml</div><div class="producto-precio">$62.00</div></div>
+      </div>
+    </div>
+
+    <!-- Botanas -->
+    <div class="seccion-titulo">🍜 Botanas</div>
+    <div class="grid-productos" style="margin-bottom:40px;">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/maruchan.webp" alt="Maruchan Preparada"/></div>
+        <div class="producto-info"><div class="producto-nombre">Maruchan Preparada</div><div class="producto-precio">$18.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/maruchansinpreparar.webp" alt="Maruchan"/></div>
+        <div class="producto-info"><div class="producto-nombre">Maruchan</div><div class="producto-precio">$15.00</div></div>
+      </div>
+    </div>
+
+    <!-- Extras -->
+    <div class="seccion-titulo">🧊 Extras</div>
+    <div class="grid-productos" style="margin-bottom:40px;">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/HIELOS.webp" alt="Hielos"/></div>
+        <div class="producto-info"><div class="producto-nombre">Hielos</div><div class="producto-precio">$28.00</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN: CERVEZAS -->
+  <div class="seccion-productos" id="cervezas">
+    <div class="seccion-titulo">🍺 Cervezas</div>
+    <div class="grid-productos">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/2 Modelo 473 ml.jpg" alt="2 Modelo 473 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">2 Modelo 473 ml</div><div class="producto-precio">$39.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/2 Vicky Sabor 473 ml.jpg" alt="2 Vicky Sabor 473 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">2 Vicky Sabor 473 ml</div><div class="producto-precio">$45.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/3 Victoria y Corona 473 ml.jpg" alt="3 Victoria y Corona 473 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">3 Victoria y Corona 473 ml</div><div class="producto-precio">$58.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/4 Modelo 355 ml.webp" alt="4 Modelo 355 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">4 Modelo 355 ml</div><div class="producto-precio">$67.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/6 Michelob Ultra lata.webp" alt="6 Michelob Ultra lata"/></div>
+        <div class="producto-info"><div class="producto-nombre">6 Michelob Ultra lata</div><div class="producto-precio">$104.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/6 Michelob Ultra media.jpg" alt="6 Michelob Ultra media"/></div>
+        <div class="producto-info"><div class="producto-nombre">6 Michelob Ultra media</div><div class="producto-precio">$110.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/6 Modelo Especial o Negra 355 ml.jpg" alt="6 Modelo Especial o Negra 355 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">6 Modelo Especial o Negra 355 ml</div><div class="producto-precio">$106.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/6 Victoria y Corona 355 ml.jpg" alt="6 Victoria y Corona 355 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">6 Victoria y Corona 355 ml</div><div class="producto-precio">$92.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/16 Corona y Victoria 210 ml.jpg" alt="16 Corona y Victoria 210 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">16 Corona y Victoria 210 ml</div><div class="producto-precio">$154.00</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN: BEBIDAS -->
+  <div class="seccion-productos" id="bebidas">
+    <div class="seccion-titulo">🥤 Bebidas</div>
+    <div class="grid-productos">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Coca cola 250ml.webp" alt="Coca Cola 250 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Coca Cola 250 ml</div><div class="producto-precio">$13.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Coca Cola 355ml lata.jpg" alt="Coca Cola 355 ml lata"/></div>
+        <div class="producto-info"><div class="producto-nombre">Coca Cola 355 ml lata</div><div class="producto-precio">$17.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Coca Cola 600ml.webp" alt="Coca Cola 600 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Coca Cola 600 ml</div><div class="producto-precio">$18.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Coca 355ml.jpg" alt="Coca Cola 355 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Coca Cola 355 ml</div><div class="producto-precio">$13.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Coca cola 3L.jpg" alt="Coca Cola 3 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Coca Cola 3 L</div><div class="producto-precio">$45.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Dr Pepper 600ml.jpg" alt="Dr Pepper 600 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Dr Pepper 600 ml</div><div class="producto-precio">$17.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Sprite 3L.jpg" alt="Sprite 3 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Sprite 3 L</div><div class="producto-precio">$45.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Nestle Pv 1.5L.jpg" alt="Nestlé Pureza Vital 1.5 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Nestlé Pureza Vital 1.5 L</div><div class="producto-precio">$13.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Nestlé Pureza Vital 4 L.jpg" alt="Nestlé Pureza Vital 4 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Nestlé Pureza Vital 4 L</div><div class="producto-precio">$28.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Penafiel Agua Min 600ml.jpg" alt="Peñafiel Agua Mineral 600 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Peñafiel Agua Mineral 600 ml</div><div class="producto-precio">$16.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Penafiel Fresada 600ml.jpg" alt="Peñafiel Fresa 600 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Peñafiel Fresa 600 ml</div><div class="producto-precio">$18.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Penafiel Limonada 600ml.jpg" alt="Peñafiel Limonada 600 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Peñafiel Limonada 600 ml</div><div class="producto-precio">$18.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Penafiel Mangada 600ml.jpg" alt="Peñafiel Mango 600 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Peñafiel Mango 600 ml</div><div class="producto-precio">$18.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Pena Sifon 1.72L.webp" alt="Peñafiel Sifón 1.72 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Peñafiel Sifón 1.72 L</div><div class="producto-precio">$30.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Clamato 1L.jpg" alt="Clamato 1 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Clamato 1 L</div><div class="producto-precio">$40.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Jumex de 1L.jpg" alt="Jumex 1 L"/></div>
+        <div class="producto-info"><div class="producto-nombre">Jumex 1 L</div><div class="producto-precio">$30.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Monster.webp" alt="Monster Energy"/></div>
+        <div class="producto-info"><div class="producto-nombre">Monster Energy</div><div class="producto-precio">$32.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/New Mix.webp" alt="New Mix"/></div>
+        <div class="producto-info"><div class="producto-nombre">New Mix</div><div class="producto-precio">$23.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Kindle Delice.webp" alt="Kindle Delice"/></div>
+        <div class="producto-info"><div class="producto-nombre">Kindle Delice</div><div class="producto-precio">$15.00</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN: VODKA -->
+  <div class="seccion-productos" id="vodka">
+    <div class="seccion-titulo">🍸 Vodka</div>
+    <div class="grid-productos">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Absolut 750 ml.jpg" alt="Absolut 750 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Absolut 750 ml</div><div class="producto-precio">$300.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Absolut Raspberry.jpg" alt="Absolut Raspberry"/></div>
+        <div class="producto-info"><div class="producto-nombre">Absolut Raspberry</div><div class="producto-precio">$300.00</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN: RON -->
+  <div class="seccion-productos" id="ron">
+    <div class="seccion-titulo">🥃 Ron</div>
+    <div class="grid-productos">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Appleton 200ml.jpg" alt="Appleton 200 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Appleton 200 ml</div><div class="producto-precio">$100.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Bacardi Anejo 200ml.jpg" alt="Bacardí Añejo 200 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Bacardí Añejo 200 ml</div><div class="producto-precio">$68.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Bacardi Carta Blanda 200ml.jpg" alt="Bacardí Carta Blanca 200 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Bacardí Carta Blanca 200 ml</div><div class="producto-precio">$70.00</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN: TEQUILA / BRANDY -->
+  <div class="seccion-productos" id="tequila">
+    <div class="seccion-titulo">🌵 Tequila / Brandy</div>
+    <div class="grid-productos">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/100 anos 200ml.jpg" alt="100 años 200 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">100 años 200 ml</div><div class="producto-precio">$110.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Anis Mico 250ml.jpg" alt="Anís Mico 250 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Anís Mico 250 ml</div><div class="producto-precio">$60.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/Don Pedro Reserva Especial 200ml.webp" alt="Don Pedro Reserva Especial 200 ml"/></div>
+        <div class="producto-info"><div class="producto-nombre">Don Pedro Reserva Especial 200 ml</div><div class="producto-precio">$62.00</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN: BOTANAS -->
+  <div class="seccion-productos" id="botanas">
+    <div class="seccion-titulo">🍜 Botanas</div>
+    <div class="grid-productos">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/maruchan.webp" alt="Maruchan Preparada"/></div>
+        <div class="producto-info"><div class="producto-nombre">Maruchan Preparada</div><div class="producto-precio">$18.00</div></div>
+      </div>
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/maruchansinpreparar.webp" alt="Maruchan"/></div>
+        <div class="producto-info"><div class="producto-nombre">Maruchan</div><div class="producto-precio">$15.00</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN: EXTRAS -->
+  <div class="seccion-productos" id="extras">
+    <div class="seccion-titulo">🧊 Extras</div>
+    <div class="grid-productos">
+      <div class="producto-card">
+        <div class="producto-img-box"><img src="productos/HIELOS.webp" alt="Hielos"/></div>
+        <div class="producto-info"><div class="producto-nombre">Hielos</div><div class="producto-precio">$28.00</div></div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div id="image-modal">
@@ -600,7 +734,7 @@
       <h4>Contacto</h4>
       <div class="contact-item">
         <span>✆</span>
-        <a href="tel:91389990">9138 9990</a>
+        <a href="tel:3532064216">353 206 4216</a>
       </div>
       <div class="contact-item">
         <span>✆</span>
@@ -608,7 +742,7 @@
       </div>
       <div class="contact-item">
         <span>✉</span>
-        <a href="mailto:contactomodelorama@gmodelo.com">contactomodelorama@gmodelo.com</a>
+        <a href="mailto:modelo.epenche@gmail.com">modelo.epenche@gmail.com</a>
       </div>
     </div>
 
@@ -620,35 +754,43 @@
 </footer>
 
 <script>
-  // Script para manejar el Zoom (Lightbox) de las imágenes
-  const modal = document.getElementById('image-modal');
-  const modalImg = document.getElementById('modal-img');
-  const btnCerrar = document.querySelector('.cerrar-modal');
-  const productBoxes = document.querySelectorAll('.producto-img-box');
+  // TABS DE SECCIONES
+  const tabs = document.querySelectorAll('.seccion-tab');
+  const secciones = document.querySelectorAll('.seccion-productos');
 
-  // Al hacer clic en la caja de la imagen del producto
-  productBoxes.forEach(box => {
-    box.addEventListener('click', function() {
-      const img = this.querySelector('img');
-      modalImg.src = img.src; // Pasa la misma imagen al modal
-      modal.classList.add('activo'); // Muestra el modal
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      const target = this.dataset.seccion;
+
+      tabs.forEach(t => t.classList.remove('activo'));
+      secciones.forEach(s => s.classList.remove('activo'));
+
+      this.classList.add('activo');
+      document.getElementById(target).classList.add('activo');
     });
   });
 
-  // Función para cerrar el modal
+  // ZOOM DE IMÁGENES (Lightbox)
+  const modal = document.getElementById('image-modal');
+  const modalImg = document.getElementById('modal-img');
+  const btnCerrar = document.querySelector('.cerrar-modal');
+
+  document.querySelectorAll('.producto-img-box').forEach(box => {
+    box.addEventListener('click', function() {
+      const img = this.querySelector('img');
+      modalImg.src = img.src;
+      modal.classList.add('activo');
+    });
+  });
+
   function cerrarModal() {
     modal.classList.remove('activo');
-    setTimeout(() => { modalImg.src = ''; }, 300); // Limpia la imagen tras la transición
+    setTimeout(() => { modalImg.src = ''; }, 300);
   }
 
-  // Cerrar al dar clic en la "X"
   btnCerrar.addEventListener('click', cerrarModal);
-
-  // Cerrar al dar clic en el fondo negro (fuera de la imagen)
   modal.addEventListener('click', function(e) {
-    if (e.target !== modalImg) {
-      cerrarModal();
-    }
+    if (e.target !== modalImg) cerrarModal();
   });
 </script>
 
